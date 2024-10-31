@@ -7,17 +7,17 @@ import reactor.core.publisher.Mono
 @Component
 class TossPaymentExecutor(
     private val tossPaymentWebClient: WebClient,
-    private val uri: String = "/v1/payment/confirm"
+    private val uri: String = "/v1/payments/confirm"
 ) {
 
-    fun execute(paynemtKey: String, orderId: String, amount: String): Mono<String> {
+    fun execute(paymentKey: String, orderId: String, amount: String): Mono<String> {
         return tossPaymentWebClient.post()
             .uri(uri)
             .bodyValue("""
                 {
-                    "paymentKey": "${paynemtKey}",
-                    "orderId": "${orderId}",
-                    "amount": "${amount}"
+                    "paymentKey": "$paymentKey",
+                    "orderId": "$orderId",
+                    "amount": "$amount"
                 }
             """.trimIndent())
             .retrieve()

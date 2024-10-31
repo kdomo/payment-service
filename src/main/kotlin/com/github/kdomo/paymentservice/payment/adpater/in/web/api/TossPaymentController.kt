@@ -22,7 +22,7 @@ class TossPaymentController(
     @PostMapping("/confirm")
     fun confirm(@RequestBody request: TossPaymentConfirmRequest): Mono<ResponseEntity<ApiResponse<String>>> {
         return tossPaymentExecutor.execute(
-            paynemtKey = request.paymentKey,
+            paymentKey = request.paymentKey,
             orderId = request.orderId,
             amount = request.amount.toString()
         ).map {
